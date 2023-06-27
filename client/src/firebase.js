@@ -2,6 +2,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import dotenv from "dotenv";
 
+dotenv.config();
+
 const firebaseConfig = {
   apiKey: process.env.FIREBASE,
   authDomain: "video-2ef06.firebaseapp.com",
