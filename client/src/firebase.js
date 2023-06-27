@@ -1,11 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE,
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "video-2ef06.firebaseapp.com",
   projectId: "video-2ef06",
   storageBucket: "video-2ef06.appspot.com",
