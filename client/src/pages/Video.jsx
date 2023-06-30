@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutlined";
@@ -8,6 +8,7 @@ import Comments from "../components/Comments";
 import Card from "../components/Card";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -110,11 +111,26 @@ const Recommendation = styled.div`
 
 const Video = () => {
   const { currentUser } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
 
   const path = useLocation().pathname.split("/")[2];
 
-  console.log(path);
+  const [video, setVideo] = useState({});
+
+  const [channel, setChannel] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const videoRes = await axios.get(`/videos/find/${path}`);
+        const channelRes = await axios.get(`/users/find/${videoRes.userId}`);
+
+        setVideo(videoRes.data);
+        setChannel(channelRes.data);
+      } catch (err) {}
+    };
+  }, []);
 
   return (
     <Container>
