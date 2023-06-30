@@ -6,6 +6,8 @@ import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import PlaylistAddOutlinedIcon from "@mui/icons-material/PlaylistAddOutlined";
 import Comments from "../components/Comments";
 import Card from "../components/Card";
+import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -107,6 +109,13 @@ const Recommendation = styled.div`
 `;
 
 const Video = () => {
+  const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const path = useLocation().pathname.split("/")[2];
+
+  console.log(path);
+
   return (
     <Container>
       <Content>
@@ -178,7 +187,7 @@ const Video = () => {
         <Comments />
       </Content>
 
-      <Recommendation>
+      {/* <Recommendation>
         <Card type="sm" />
         <Card type="sm" />
         <Card type="sm" />
@@ -188,7 +197,7 @@ const Video = () => {
         <Card type="sm" />
         <Card type="sm" />
         <Card type="sm" />
-      </Recommendation>
+      </Recommendation> */}
     </Container>
   );
 };
