@@ -9,6 +9,8 @@ import Card from "../components/Card";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { fetchSuccess } from "../redux/videoSlice";
+import { format } from "timeago.js";
 
 const Container = styled.div`
   display: flex;
@@ -112,11 +114,11 @@ const Recommendation = styled.div`
 const Video = () => {
   const { currentUser } = useSelector((state) => state.user);
 
+  const { currentVideo } = useSelector((state) => state.video);
+
   const dispatch = useDispatch();
 
   const path = useLocation().pathname.split("/")[2];
-
-  const [video, setVideo] = useState({});
 
   const [channel, setChannel] = useState({});
 
@@ -124,13 +126,16 @@ const Video = () => {
     const fetchData = async () => {
       try {
         const videoRes = await axios.get(`/videos/find/${path}`);
-        const channelRes = await axios.get(`/users/find/${videoRes.userId}`);
+        const channelRes = await axios.get(
+          `/users/find/${videoRes.data.userId}`
+        );
 
-        setVideo(videoRes.data);
         setChannel(channelRes.data);
+        dispatch(fetchSuccess(videoRes.data));
       } catch (err) {}
     };
-  }, []);
+    fetchData();
+  }, [path, dispatch]);
 
   return (
     <Container>
@@ -147,15 +152,17 @@ const Video = () => {
           ></iframe>
         </VideoWrapper>
 
-        <Title>Test Video</Title>
+        <Title>{currentVideo.title}</Title>
 
         <Details>
-          <Info>7,000,000 views ● Jun 10, 2023</Info>
+          <Info>
+            {currentVideo.views} views ● {format(currentVideo.createdAt)}
+          </Info>
 
           <Buttons>
             <Button>
               <ThumbUpOutlinedIcon />
-              500
+              {currentVideo.likes?.length}
             </Button>
 
             <Button>
@@ -179,19 +186,12 @@ const Video = () => {
 
         <Channel>
           <ChannelInfo>
-            <Image src="https://yt3.googleusercontent.com/Ov2tJY8JdiBYxntxXOojPCjRHI6FjbjNozzsaQL4Z8GpyA5_LDqz1cD18zEA3bTYrkWZaKJyPg=s176-c-k-c0x00ffffff-no-rj" />
+            <Image src={channel.img} />
 
             <ChannelDetail>
-              <ChannelName>IGN</ChannelName>
-              <ChannelCounter>400K subscribes</ChannelCounter>
-              <Description>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
-              </Description>
+              <ChannelName>{channel.name}</ChannelName>
+              <ChannelCounter>{channel.subscribers} subscribes</ChannelCounter>
+              <Description>{currentVideo.desc}</Description>
             </ChannelDetail>
           </ChannelInfo>
 
