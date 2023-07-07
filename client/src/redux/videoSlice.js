@@ -22,6 +22,16 @@ export const videoSlice = createSlice({
       state.loading = false;
       state.error = true;
     },
+
+    like: (state, action) => {
+      if (!state.currentVideo.likes.includes(action.payload)){
+        state.currentVideo.likes.push(action.payload);
+        state.currentVideo.dislikes.splice{
+        state.currentVideo.dislikes.findIndex (usrId) => userId === action.payload {third}/
+        }
+      }
+    }
+
   },
 });
 
