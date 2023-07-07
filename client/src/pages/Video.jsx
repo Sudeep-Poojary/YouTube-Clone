@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutlined";
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import PlaylistAddOutlinedIcon from "@mui/icons-material/PlaylistAddOutlined";
 import Comments from "../components/Comments";
 import Card from "../components/Card";
@@ -161,7 +162,11 @@ const Video = () => {
 
           <Buttons>
             <Button>
-              <ThumbUpOutlinedIcon />
+              {currentVideo.likes?.includes(currentUser._id) ? (
+                <ThumbUpIcon />
+              ) : (
+                <ThumbUpOutlinedIcon />
+              )}{" "}
               {currentVideo.likes?.length}
             </Button>
 
