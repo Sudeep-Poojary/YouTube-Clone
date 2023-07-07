@@ -4,6 +4,7 @@ import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutlined";
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import PlaylistAddOutlinedIcon from "@mui/icons-material/PlaylistAddOutlined";
 import Comments from "../components/Comments";
 import Card from "../components/Card";
@@ -138,6 +139,14 @@ const Video = () => {
     fetchData();
   }, [path, dispatch]);
 
+  const handleLike = async () => {
+    await axios.put(`/users/like/${currentVideo._id}`);
+  };
+
+  const handleDislike = async () => {
+    await axios.put(`/users/dislike/${currentVideo._id}`);
+  };
+
   return (
     <Container>
       <Content>
@@ -161,7 +170,7 @@ const Video = () => {
           </Info>
 
           <Buttons>
-            <Button>
+            <Button onClick={handleLike}>
               {currentVideo.likes?.includes(currentUser._id) ? (
                 <ThumbUpIcon />
               ) : (
@@ -170,8 +179,12 @@ const Video = () => {
               {currentVideo.likes?.length}
             </Button>
 
-            <Button>
-              <ThumbDownOffAltOutlinedIcon />
+            <Button onClick={handleDislike}>
+              {currentVideo.dislikes?.includes(currentUser._id) ? (
+                <ThumbDownIcon />
+              ) : (
+                <ThumbDownOffAltOutlinedIcon />
+              )}{" "}
               Dislike
             </Button>
 
