@@ -215,7 +215,11 @@ const Video = () => {
             </ChannelDetail>
           </ChannelInfo>
 
-          <Subscribe>SUBSCRIBE</Subscribe>
+          <Subscribe>
+            {currentUser.subscribedUsers?.includes(channel._id)
+              ? "SUBSCRIBED"
+              : "SUBSCRIBE"}
+          </Subscribe>
         </Channel>
 
         <Hr />
