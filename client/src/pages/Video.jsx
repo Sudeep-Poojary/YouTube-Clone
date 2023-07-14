@@ -114,6 +114,12 @@ const Recommendation = styled.div`
   flex: 2;
 `;
 
+const VideoFrame = styled.video`
+  max-height: 750px;
+  width: 100%;
+  object-fit: cover;
+`;
+
 const Video = () => {
   const { currentUser } = useSelector((state) => state.user);
 
@@ -161,15 +167,7 @@ const Video = () => {
     <Container>
       <Content>
         <VideoWrapper>
-          <iframe
-            width="100%"
-            height="720"
-            src="https://www.youtube.com/embed/8q8tfH-40SI"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe>
+          <VideoFrame src={currentVideo.videoUrl} />
         </VideoWrapper>
 
         <Title>{currentVideo.title}</Title>
@@ -232,7 +230,7 @@ const Video = () => {
 
         <Hr />
 
-        <Comments />
+        <Comments videoId={currentVideo._id} />
       </Content>
 
       {/* <Recommendation>
