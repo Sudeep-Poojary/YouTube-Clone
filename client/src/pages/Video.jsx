@@ -7,13 +7,13 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import PlaylistAddOutlinedIcon from "@mui/icons-material/PlaylistAddOutlined";
 import Comments from "../components/Comments";
-import Card from "../components/Card";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { dislike, fetchSuccess, like } from "../redux/videoSlice";
 import { format } from "timeago.js";
 import { subscription } from "../redux/userSlice";
+import Recommendation from "../components/Recommendation";
 
 const Container = styled.div`
   display: flex;
@@ -110,10 +110,6 @@ const Subscribe = styled.button`
   cursor: pointer;
 `;
 
-const Recommendation = styled.div`
-  flex: 2;
-`;
-
 const VideoFrame = styled.video`
   max-height: 750px;
   width: 100%;
@@ -167,7 +163,7 @@ const Video = () => {
     <Container>
       <Content>
         <VideoWrapper>
-          <VideoFrame src={currentVideo.videoUrl} />
+          <VideoFrame src={currentVideo.videoUrl} controls />
         </VideoWrapper>
 
         <Title>{currentVideo.title}</Title>
@@ -233,17 +229,7 @@ const Video = () => {
         <Comments videoId={currentVideo._id} />
       </Content>
 
-      {/* <Recommendation>
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-      </Recommendation> */}
+      <Recommendation tags={currentVideo.tags} />
     </Container>
   );
 };
