@@ -14,40 +14,49 @@
 
 ## Installation 💾
 
-```bash
-git clone https://github.com/Sudeep-Poojary/YouTube-Clone.git
-```
+  1. Clone the Repository
+     
+  ```bash
+    git clone https://github.com/Sudeep-Poojary/YouTube-Clone.git
+  ```
 
-Create config.env file in `client` folder and Fill your `.env` variables:
+  2. Create config.env file in `client` folder and Fill your `.env` variables:
 
-```env
-REACT_APP_FIREBASE_API_KEY=
-```
+  ```env
+      REACT_APP_FIREBASE_API_KEY=
+  ```
 
-Create config.env file in `server` folder and Fill your `.env` variables:
+  3. Create config.env file in `server` folder and Fill your `.env` variables:
 
-```env
-MONGO=
-JWT=
-```
+  ```env
+      MONGO=
+      JWT=
+  ```
 
-Install dependencies:
+  4. Install dependencies:
 
-```bash
-npm install
-```
+  ```bash
+      npm install
+  ```
 
-Run React Server from `client` folder:
+  5. Run React Server from `client` folder:
 
-```bash
-npm start
-```
+  ```bash
+      npm start
+  ```
 
-Run Node.js Server from `server` folder:
+  6. Run Node.js Server from `server` folder:
 
-```bash
-npm start
-```
+  ```bash
+      npm start
+  ```
 
 
-Check the Front-End here: https://view-tube-pi.vercel.app/
+
+## Screenshots 📸
+
+
+
+## Check the UI Here 💫
+
+  ### [ViewTube](https://view-tube-pi.vercel.app/)
